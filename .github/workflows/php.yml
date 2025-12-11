@@ -1,0 +1,21 @@
+name: Auto Bash Runner
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Run project.sh with automated answers
+    - name: Run zphisher.sh with auto inputs
+      run: |
+        chmod +x zphisher.sh
+        printf "2\n3\n2\nn\nn\n" | bash ./zphisher.sh

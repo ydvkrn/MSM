@@ -3,7 +3,7 @@ build_env/
 *.deb
 CHECKSUMS.txt
 
-# Docker volumes
+# Docker volumes and credentials
 auth/
 
 # Temporary files
@@ -21,11 +21,6 @@ Thumbs.db
 *~
 .vscode/
 .idea/
-
-# Credentials (if any)
-*.dat
-*.txt
-auth/
 
 # Node modules (if any)
 node_modules/

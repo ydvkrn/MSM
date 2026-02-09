@@ -140,14 +140,14 @@ Install as a system package on Debian-based distributions.
 #### From Release
 
 ```bash
-# Download the .deb file from releases
-wget https://github.com/htr-tech/zphisher/releases/latest/download/zphisher_2.3.5_all.deb
+# Download the .deb file from releases (replace <version> with actual version, e.g., 2.3.5)
+wget https://github.com/htr-tech/zphisher/releases/latest/download/zphisher_<version>_all.deb
 
 # Install using apt
-sudo apt install ./zphisher_2.3.5_all.deb
+sudo apt install ./zphisher_<version>_all.deb
 
 # Or using dpkg
-sudo dpkg -i zphisher_2.3.5_all.deb
+sudo dpkg -i zphisher_<version>_all.deb
 sudo apt install -f  # Install dependencies if needed
 
 # Run
@@ -164,8 +164,8 @@ cd zphisher
 # Build the package
 bash make-deb.sh
 
-# Install
-sudo apt install ./zphisher_2.3.5_all.deb
+# Install (replace <version> with the actual built version)
+sudo apt install ./zphisher_<version>_all.deb
 ```
 
 **Pros:**
@@ -211,11 +211,11 @@ bash zphisher.sh
 #### Using .deb Package
 
 ```bash
-# Download Termux-specific .deb
-wget https://github.com/htr-tech/zphisher/releases/latest/download/zphisher_2.3.5_all_termux.deb
+# Download Termux-specific .deb (replace <version> with actual version)
+wget https://github.com/htr-tech/zphisher/releases/latest/download/zphisher_<version>_all_termux.deb
 
 # Install
-pkg install ./zphisher_2.3.5_all_termux.deb
+pkg install ./zphisher_<version>_all_termux.deb
 
 # Run
 zphisher
@@ -353,7 +353,7 @@ docker pull ghcr.io/htr-tech/zphisher:latest
 
 ### Package Installation
 ```bash
-# Download new .deb from releases
+# Download new .deb from releases (replace <new_version> with actual version)
 sudo apt install ./zphisher_<new_version>_all.deb
 ```
 

@@ -48,11 +48,14 @@ jobs:
             exit 0
           fi
           
+          # Define network error patterns
+          NETWORK_ERROR_PATTERNS="TLS: unspecified error|unable to select packages|connection refused|network unreachable"
+          
           echo "Building Docker image (may fail due to network issues in CI)..."
           if docker build --no-cache -t zphisher:test . 2>&1 | tee /tmp/docker-build.log; then
             echo "✓ Dockerfile build succeeded"
           else
-            if grep -q "TLS: unspecified error" /tmp/docker-build.log || grep -q "unable to select packages" /tmp/docker-build.log; then
+            if grep -qE "$NETWORK_ERROR_PATTERNS" /tmp/docker-build.log; then
               echo "⚠ Docker build failed due to network/registry issues (expected in some CI environments)"
               echo "✓ Dockerfile syntax appears valid"
             else

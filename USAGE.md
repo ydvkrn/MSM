@@ -144,7 +144,7 @@ After selecting a template, you'll see:
 ```
 [01] Localhost
 [02] Cloudflared  [Auto Detects]
-[03] LocalXpose   [NEW! Max 15Min]
+[03] LocalXpose   [Time Limited]
 
 Select a port forwarding service:
 ```
@@ -174,6 +174,8 @@ After selecting a hosting option:
 
 ### Step 5: Share the Link
 
+⚠️ **IMPORTANT:** Only share links for authorized security testing or educational purposes with proper written permission.
+
 Copy the generated link and share it with your target through:
 - Social media messages
 - Email
@@ -195,6 +197,8 @@ When someone visits your link and enters credentials, they will be automatically
 
 ### Sharing Methods
 
+⚠️ **AUTHORIZATION REQUIRED:** Only use these methods for authorized security testing with written permission. Unauthorized use is illegal and unethical.
+
 1. **Direct Link Sharing:**
    - Copy and paste the URL directly
    - Works for any messaging platform
@@ -209,10 +213,12 @@ When someone visits your link and enters credentials, they will be automatically
    - Share the QR code image
    - Useful for physical distribution
 
-4. **Social Engineering Context:**
+4. **Social Engineering Context (For Authorized Testing Only):**
+   - Only use in authorized penetration testing scenarios
    - Always provide context when sharing (e.g., "Check out this offer", "Verify your account")
    - Make it relevant to your target
    - Time it appropriately
+   - Document the testing scenario and obtain proper authorization
 
 ### URL Masking Example
 

@@ -1,0 +1,11 @@
+services:
+  zphisher:
+    build: .
+    image: zphisher:latest
+    container_name: zphisher
+    stdin_open: true
+    tty: true
+    network_mode: host
+    volumes:
+      - ./auth:/zphisher/auth
+    restart: unless-stopped

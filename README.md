@@ -65,6 +65,8 @@ It only demonstrates "how phishing works". <b>You shall not misuse the informati
 - On first launch, It'll install the dependencies and that's it. ***Zphisher*** is installed.
 
 > **📖 For detailed deployment instructions**, including Docker Compose, system packages, and troubleshooting, see [DEPLOYMENT.md](DEPLOYMENT.md)
+> 
+> **📚 For usage instructions**, including how to use hosting options, view links, and share phishing pages, see [USAGE.md](USAGE.md)
 
 ##
 

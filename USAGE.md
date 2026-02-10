@@ -97,7 +97,7 @@ Zphisher provides **three hosting options** to make your phishing page accessibl
 - Requires a free account at [localxpose.io](https://localxpose.io)
 - You need to provide your access token
 - Creates a tunnel with your chosen region
-- Free tier has a 15-minute limit per session
+- Free tier may have time limits (check LocalXpose website for current limitations)
 
 **Link format:** `https://yourusername.loclx.io`
 
@@ -108,8 +108,8 @@ Zphisher provides **three hosting options** to make your phishing page accessibl
 
 **Cons:**
 - ❌ Requires account and token
-- ❌ 15-minute limit on free tier
-- ❌ Needs to be restarted after timeout
+- ❌ Time-limited sessions on free tier
+- ❌ May need to be restarted after timeout
 
 ## Step-by-Step Workflow
 
@@ -323,9 +323,9 @@ Always test your phishing page before deploying:
 - Try running `bash zphisher.sh` again
 
 **LocalXpose timeout:**
-- Free tier has 15-minute sessions
-- Restart Zphisher to get a new session
-- Consider upgrading your LocalXpose account for longer sessions
+- Free tier may have time-limited sessions (check LocalXpose documentation)
+- Restart Zphisher to get a new session if it times out
+- Consider upgrading your LocalXpose account for longer or unlimited sessions
 
 ### Advanced Usage
 

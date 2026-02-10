@@ -1,0 +1,26 @@
+# Build artifacts
+build_env/
+*.deb
+CHECKSUMS.txt
+
+# Docker volumes and credentials
+auth/
+
+# Temporary files
+*.tmp
+*.log
+/tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Node modules (if any)
+node_modules/

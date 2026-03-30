@@ -1,0 +1,2 @@
+$ dpkg -i <your path to deb file>
+$ apt install -fapt install <your path to deb file>https://github.com/htr-tech/zphisher.git
